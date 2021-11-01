@@ -67,13 +67,14 @@ const renderItem = ({ item }) => {
       stargazersCount={item.stargazersCount}
       ratingAverage={item.ratingAverage}
       reviewCount={item.reviewCount}
+      ownerAvatarUrl={item.ownerAvatarUrl}
     />
   );
 };
 
 const RepositoryList = () => {
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{ flex: 1 }}>
       <FlatList
         data={repositories}
         renderItem={renderItem}
