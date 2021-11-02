@@ -77,9 +77,7 @@ const RepositoryItem = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white',
-    display: 'flex',
-
+    backgroundColor: 'white'
   },
   logo: {
     width: 66,

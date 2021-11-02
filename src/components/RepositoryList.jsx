@@ -74,7 +74,7 @@ const renderItem = ({ item }) => {
 
 const RepositoryList = () => {
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView>
       <FlatList
         data={repositories}
         renderItem={renderItem}
