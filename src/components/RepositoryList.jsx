@@ -1,10 +1,10 @@
 import React from 'react';
-import { FlatList, View, StyleSheet, SafeAreaView } from 'react-native';
+import { FlatList, View, StyleSheet } from 'react-native';
 import RepositoryItem from './RepositoryItem';
 
 const styles = StyleSheet.create({
   separator: {
-    height: 10,
+    height: 10
   },
 });
 
@@ -53,6 +53,17 @@ const repositories = [
     reviewCount: 0,
     ownerAvatarUrl: 'https://avatars3.githubusercontent.com/u/13142323?v=4',
   },
+  {
+    id: 'gjhghj',
+    fullName: 'reduxjs/redux',
+    description: 'Predictable state container for JavaScript apps',
+    language: 'TypeScript',
+    forksCount: 13902,
+    stargazersCount: 52869,
+    ratingAverage: 0,
+    reviewCount: 0,
+    ownerAvatarUrl: 'https://avatars3.githubusercontent.com/u/13142323?v=4',
+  },
 ];
 
 const ItemSeparator = () => <View style={styles.separator} />;
@@ -74,13 +85,11 @@ const renderItem = ({ item }) => {
 
 const RepositoryList = () => {
   return (
-    <SafeAreaView>
       <FlatList
         data={repositories}
         renderItem={renderItem}
         ItemSeparatorComponent={ItemSeparator}
-      />
-    </SafeAreaView>
+    />
   );
 };
 
