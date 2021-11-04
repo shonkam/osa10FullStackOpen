@@ -4,12 +4,13 @@ import { View, Pressable, StyleSheet } from 'react-native';
 import Text from './Text';
 
 const SingInForm = ({ onSubmit }) => {
+
   return (
     <View style={styles.container}>
       <FormikTextInput style={styles.inputField} name="username" placeholder="Username" />
       <FormikTextInput style={styles.inputField} name="password" placeholder="Password" />
       <Pressable style={styles.button} onPress={onSubmit}>
-        <Text style={{ textAlign: 'center', color: 'white' }}>Log in</Text>
+        <Text style={{ textAlign: 'center', color: 'white', paddingVertical: 5 }}>Log in</Text>
       </Pressable>
     </View>
   );
