@@ -1,6 +1,7 @@
 import React from 'react';
-import { Pressable, Text, StyleSheet } from 'react-native';
+import { Pressable, StyleSheet } from 'react-native';
 import { Link } from 'react-router-native';
+import Text from './Text';
 
 const AppBarTab = ({ tabName, route }) => {
   return (
@@ -17,8 +18,7 @@ const AppBarTab = ({ tabName, route }) => {
 
 const styles = StyleSheet.create({
   pressable: {
-    paddingRight: 5,
-    paddingLeft: 5,
+    marginLeft: 10
   },
   text: {
     fontSize: 20,

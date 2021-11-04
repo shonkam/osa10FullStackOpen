@@ -1,9 +1,24 @@
 import React from 'react';
+import { Formik } from 'formik';
 
-import Text from './Text';
+import SingInForm from './SignInForm';
+
+const initialValues = {
+  username: '',
+  password: '',
+};
 
 const SignIn = () => {
-  return <Text>The sign in view</Text>;
+
+  const onSubmit = values => {
+    console.log(values);
+  };
+
+  return (
+    <Formik initialValues={initialValues} onSubmit={onSubmit}>
+      {({ handleSubmit }) => <SingInForm onSubmit={handleSubmit} />}
+    </Formik>
+  );
 };
 
 export default SignIn;
