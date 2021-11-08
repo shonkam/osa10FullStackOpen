@@ -16,7 +16,7 @@ const styles = StyleSheet.create({
 
 const TextInput = ({ style, error, ...props }) => {
   const textInputStyle = [style];
-  console.log(error);
+  //console.log(error);
   if (!error) {
     return <NativeTextInput style={textInputStyle} {...props} />;
   }
