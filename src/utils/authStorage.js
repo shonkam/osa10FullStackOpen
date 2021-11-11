@@ -11,10 +11,11 @@ class AuthStorage {
         `${this.namespace}:accessToken`
       );
       if (accessToken !== null) {
-        console.log('get accesstoken', accessToken);
+        return accessToken;
       }
       else {
         console.log('no access token');
+        return null;
       }
     } catch (err) {
       console.log(err);
@@ -22,7 +23,6 @@ class AuthStorage {
   }
 
   async setAccessToken(accessToken) {
-    console.log('auth', accessToken);
     try {
       await AsyncStorage.setItem(
         `${this.namespace}:accessToken`,
@@ -44,7 +44,7 @@ class AuthStorage {
     }
   }
 }
-
+/*
 const newAuthStorage = async () => {
   const storageForAccessToken = new AuthStorage('storageForAccessToken');
 
@@ -55,5 +55,5 @@ const newAuthStorage = async () => {
 };
 
 newAuthStorage();
-
+*/
 export default AuthStorage;
