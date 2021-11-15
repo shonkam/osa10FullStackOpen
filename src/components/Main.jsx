@@ -4,6 +4,7 @@ import { Route, Switch } from 'react-router-native';
 import AppBar from "./AppBar";
 import RepositoryList from "./RepositoryList";
 import SignIn from './SignIn';
+import SignOut from "./SignOut";
 
 const Main = () => {
   return (
@@ -11,6 +12,7 @@ const Main = () => {
       <AppBar />
       <Switch>
         <Route path="/signin" component={SignIn} />
+        <Route path="/signout" component={SignOut} />
         <Route exact path="/" component={RepositoryList} />
       </Switch>
     </SafeAreaView>

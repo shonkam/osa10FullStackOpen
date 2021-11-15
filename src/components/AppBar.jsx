@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet, ScrollView } from 'react-native';
 import Constants from 'expo-constants';
 import AppBarTab from './AppBarTab';
+import useAuthorizedUser from '../hooks/useAuthorizedUser';
 
 const styles = StyleSheet.create({
   container: {
@@ -13,11 +14,17 @@ const styles = StyleSheet.create({
 });
 
 const AppBar = () => {
+
+  let logged = false;
+  logged = useAuthorizedUser();
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollView} horizontal>
         <AppBarTab tabName={'Repositories'} route='/' />
-        <AppBarTab tabName={'Sign in'} route='/signin' />
+        {logged ?
+          <AppBarTab tabName={'Sign out'} route='/signout' />
+          : <AppBarTab tabName={'Sign in'} route='/signin' />
+        }
       </ScrollView>
     </View>
   );

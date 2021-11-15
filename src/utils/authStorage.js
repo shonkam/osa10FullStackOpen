@@ -11,6 +11,8 @@ class AuthStorage {
         `${this.namespace}:accessToken`
       );
       if (accessToken !== null) {
+
+        console.log('hue', accessToken);
         return accessToken;
       }
       else {
@@ -24,9 +26,10 @@ class AuthStorage {
 
   async setAccessToken(accessToken) {
     try {
+
       await AsyncStorage.setItem(
         `${this.namespace}:accessToken`,
-        JSON.stringify(accessToken)
+        accessToken
       );
     } catch (err) {
       console.log(err);

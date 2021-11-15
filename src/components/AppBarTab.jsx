@@ -4,11 +4,12 @@ import { Link } from 'react-router-native';
 import Text from './Text';
 
 const AppBarTab = ({ tabName, route }) => {
+
   return (
     <Pressable
       style={styles.pressable}>
       <Link to={`${route}`}>
-        <Text style={styles.text}>
+        <Text style={styles.text} >
           {tabName}
         </Text>
       </Link>
