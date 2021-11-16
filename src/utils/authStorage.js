@@ -11,8 +11,6 @@ class AuthStorage {
         `${this.namespace}:accessToken`
       );
       if (accessToken !== null) {
-
-        console.log('hue', accessToken);
         return accessToken;
       }
       else {

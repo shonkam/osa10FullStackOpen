@@ -28,6 +28,22 @@ export const AUTHORIZED_USER = gql`
   }
 `;
 
+export const REPOSITORY = gql`
+  query ($id: ID!){
+    repository(id: $id){
+        fullName
+        description
+        language
+        forksCount
+        stargazersCount
+        ratingAverage
+        reviewCount
+        ownerAvatarUrl
+        url
+    }
+  }
+`;
+
 export const AUTHORIZE = gql`
   mutation ($username: String!, $password: String!){
       authorize(

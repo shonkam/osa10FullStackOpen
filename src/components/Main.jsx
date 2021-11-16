@@ -5,6 +5,7 @@ import AppBar from "./AppBar";
 import RepositoryList from "./RepositoryList";
 import SignIn from './SignIn';
 import SignOut from "./SignOut";
+import SingleRepositoryView from "./SingleRepositoryView";
 
 const Main = () => {
   return (
@@ -13,6 +14,7 @@ const Main = () => {
       <Switch>
         <Route path="/signin" component={SignIn} />
         <Route path="/signout" component={SignOut} />
+        <Route path="/repository/:id" component={SingleRepositoryView} />
         <Route exact path="/" component={RepositoryList} />
       </Switch>
     </SafeAreaView>

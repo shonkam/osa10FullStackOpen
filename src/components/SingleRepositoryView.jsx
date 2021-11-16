@@ -1,19 +1,36 @@
 import React from 'react';
-import { View, Image, StyleSheet, Pressable } from 'react-native';
+import { View, Image, StyleSheet, Button } from 'react-native';
 import Text from './Text';
-import { useHistory } from "react-router-native";
+import { useParams } from "react-router-native";
+import useRepository from '../hooks/useRepository';
+import * as WebBrowser from 'expo-web-browser';
 
-const RepositoryItem = ({
-  id,
-  fullName,
-  description,
-  language,
-  forksCount,
-  stargazersCount,
-  ratingAverage,
-  reviewCount,
-  ownerAvatarUrl
-}) => {
+const SingleRepositoryView = () => {
+
+  const { id } = useParams();
+  const repo = useRepository(id);
+
+  if (!repo) {
+    return (
+      <View>
+        <Text>Loading...</Text>
+      </View>
+    );
+  }
+
+  const fullName = repo.repository.fullName;
+  const description = repo.repository.description;
+  const language = repo.repository.language;
+  let forksCount = repo.repository.forksCount;
+  let stargazersCount = repo.repository.stargazersCount;
+  const ratingAverage = repo.repository.ratingAverage;
+  const reviewCount = repo.repository.reviewCount;
+  const ownerAvatarUrl = repo.repository.ownerAvatarUrl;
+  const url = repo.repository.url;
+
+  const openGitHub = () => {
+    WebBrowser.openBrowserAsync(url);
+  };
 
   if (stargazersCount > 999) {
     stargazersCount = Math.round(stargazersCount / 100) * 100;
@@ -47,15 +64,9 @@ const RepositoryItem = ({
       forksCount = forksCount + '.' + forksHundreds + 'k';
     }
   }
-  let history = useHistory();
-
-  const moveToSingleRepoView = () => {
-    history.push(`/repository/${id}`);
-  };
 
   return (
     < View style={styles.container}>
-      <Pressable onPress={moveToSingleRepoView}>
       <View style={styles.pictureNameDesc}>
         <Image style={styles.logo} source={{ uri: ownerAvatarUrl }} />
         <View style={styles.nameDesc}>
@@ -79,7 +90,12 @@ const RepositoryItem = ({
         <Text style={styles.stats}>Reviews</Text>
         <Text style={styles.stats}>Rating</Text>
       </View>
-      </Pressable>
+      <View style={styles.button}>
+        <Button
+          onPress={openGitHub}
+          title={'Open in GitHub'}
+        />
+      </View>
     </View>
   );
 };
@@ -88,13 +104,20 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white'
   },
+  button: {
+    flexGrow: 1,
+    paddingLeft: 10,
+    paddingRight: 10,
+    paddingTop: 10,
+    paddingBottom: 10
+  },
   logo: {
     width: 66,
     height: 58,
   },
   pictureNameDesc: {
     flexDirection: 'row',
-    flex: 1,
+    flexGrow: 1,
     paddingLeft: 10,
     paddingRight: 10,
     paddingTop: 10,
@@ -112,8 +135,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   bottomFourStats: {
-    flexDirection: 'row',
-
+    flexDirection: 'row'
   },
   stats: {
     flex: 1,
@@ -122,4 +144,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default RepositoryItem;
+export default SingleRepositoryView;
