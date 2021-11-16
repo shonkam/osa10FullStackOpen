@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, StyleSheet, Button } from 'react-native';
+import { View, Image, StyleSheet, Button, FlatList } from 'react-native';
 import Text from './Text';
 import { useParams } from "react-router-native";
 import useRepository from '../hooks/useRepository';
@@ -27,6 +27,8 @@ const SingleRepositoryView = () => {
   const reviewCount = repo.repository.reviewCount;
   const ownerAvatarUrl = repo.repository.ownerAvatarUrl;
   const url = repo.repository.url;
+
+  const repositoryReviews = repo.repository.reviews.edges.map(edge => edge.node);
 
   const openGitHub = () => {
     WebBrowser.openBrowserAsync(url);
@@ -65,6 +67,29 @@ const SingleRepositoryView = () => {
     }
   }
 
+  const ReviewItem = ({ review }) => {
+    const date = new Date(review.createdAt);
+    const day = date.getDate();
+    const month = date.getMonth();
+    const year = date.getFullYear();
+
+    return (
+      <View style={styles.reviewContainer}>
+        <View style={styles.reviewScore}>
+          <Text style={styles.rating}>{review.rating}</Text>
+
+        </View>
+        <View style={styles.reviewInfo}>
+          <Text fontWeight="bold" style={{ fontSize: 16 }}>{review.user.username} </Text>
+          <Text style={{ fontSize: 14 }}>{day}.{month}.{year} </Text>
+          <Text>{review.text}</Text>
+        </View>
+      </View>
+    );
+  };
+
+  const ItemSeparator = () => <View style={styles.separator} />;
+
   return (
     < View style={styles.container}>
       <View style={styles.pictureNameDesc}>
@@ -90,32 +115,46 @@ const SingleRepositoryView = () => {
         <Text style={styles.stats}>Reviews</Text>
         <Text style={styles.stats}>Rating</Text>
       </View>
+
       <View style={styles.button}>
         <Button
           onPress={openGitHub}
           title={'Open in GitHub'}
         />
       </View>
+
+      <View style={styles.separator} />
+
+      <FlatList
+        data={repositoryReviews}
+        renderItem={({ item }) => <ReviewItem review={item} />}
+        keyExtractor={({ id }) => id}
+        ItemSeparatorComponent={ItemSeparator}
+      />
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: 'white'
   },
   button: {
     flexGrow: 1,
     paddingLeft: 10,
     paddingRight: 10,
     paddingTop: 10,
-    paddingBottom: 10
+    paddingBottom: 10,
+    backgroundColor: 'white'
+  },
+  separator: {
+    height: 10
   },
   logo: {
     width: 66,
     height: 58,
   },
   pictureNameDesc: {
+    backgroundColor: 'white',
     flexDirection: 'row',
     flexGrow: 1,
     paddingLeft: 10,
@@ -135,12 +174,39 @@ const styles = StyleSheet.create({
     borderRadius: 5,
   },
   bottomFourStats: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    backgroundColor: 'white'
   },
   stats: {
     flex: 1,
     textAlign: 'center',
     textAlignVertical: 'center'
+  },
+  reviewContainer: {
+    backgroundColor: 'white',
+    flexDirection: 'row'
+  },
+  reviewInfo: {
+    flex: 6,
+    flexDirection: 'column'
+  },
+  reviewScore: {
+    flex: 1,
+    justifyContent: 'flex-start',
+    paddingTop: 7
+  },
+  rating: {
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    fontSize: 16,
+    color: '#0366d6',
+    borderColor: '#0366d6',
+    borderRadius: 15,
+    borderWidth: 2,
+    height: 30,
+    width: 30,
+    alignSelf: 'center',
+
   }
 });
 
