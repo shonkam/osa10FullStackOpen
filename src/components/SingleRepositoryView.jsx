@@ -193,7 +193,7 @@ const styles = StyleSheet.create({
   reviewScore: {
     flex: 1,
     justifyContent: 'flex-start',
-    paddingTop: 7
+    paddingTop: 3
   },
   rating: {
     textAlign: 'center',
@@ -201,10 +201,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#0366d6',
     borderColor: '#0366d6',
-    borderRadius: 15,
+    borderRadius: 20,
     borderWidth: 2,
-    height: 30,
-    width: 30,
+    height: 40,
+    width: 40,
     alignSelf: 'center',
 
   }
