@@ -17,14 +17,24 @@ const AppBar = () => {
 
   let logged = false;
   logged = useAuthorizedUser();
+
+  if (logged) {
+    return (
+      <View style={styles.container}>
+        <ScrollView style={styles.scrollView} horizontal>
+          <AppBarTab tabName={'Repositories'} route='/' />
+          <AppBarTab tabName={'Create a review'} route='/createReview' />
+          <AppBarTab tabName={'Sign out'} route='/signout' />
+        </ScrollView>
+      </View>
+    );
+  }
+
   return (
     <View style={styles.container}>
       <ScrollView style={styles.scrollView} horizontal>
         <AppBarTab tabName={'Repositories'} route='/' />
-        {logged ?
-          <AppBarTab tabName={'Sign out'} route='/signout' />
-          : <AppBarTab tabName={'Sign in'} route='/signin' />
-        }
+        <AppBarTab tabName={'Sign in'} route='/signin' />
       </ScrollView>
     </View>
   );

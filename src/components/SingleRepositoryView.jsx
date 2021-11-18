@@ -8,6 +8,7 @@ import * as WebBrowser from 'expo-web-browser';
 const SingleRepositoryView = () => {
 
   const { id } = useParams();
+  console.log('single param id', id);
   const repo = useRepository(id);
 
   if (!repo) {
