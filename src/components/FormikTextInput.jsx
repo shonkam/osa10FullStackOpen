@@ -16,7 +16,7 @@ const FormikTextInput = ({ name, ...props }) => {
   const [field, meta, helpers] = useField(name);
   const showError = meta.touched && meta.error;
 
-  if (name === 'password') {
+  if (name === 'password' || name === 'passwordConfirmation') {
     return (
       <>
         <TextInput

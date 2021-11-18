@@ -35,6 +35,7 @@ const AppBar = () => {
       <ScrollView style={styles.scrollView} horizontal>
         <AppBarTab tabName={'Repositories'} route='/' />
         <AppBarTab tabName={'Sign in'} route='/signin' />
+        <AppBarTab tabName={'Sign up'} route='/signup' />
       </ScrollView>
     </View>
   );
