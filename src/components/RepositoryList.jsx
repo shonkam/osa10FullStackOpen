@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 import { FlatList, View, StyleSheet } from 'react-native';
 import RepositoryItem from './RepositoryItem';
 import useRepositories from '../hooks/useRepositories';
-import { Button, Menu, Provider } from 'react-native-paper';
+import { Button, Menu, Provider, TextInput } from 'react-native-paper';
+import { useDebounce } from 'use-debounce';
+
+
 
 
 const styles = StyleSheet.create({
@@ -32,11 +35,14 @@ const renderItem = ({ item }) => {
   );
 };
 
-const RepositoryList = () => {
 
+const RepositoryList = () => {
+  const [filter, setFilter] = useState('');
+  const [bouncedFilter] = useDebounce(filter, 1000);
   const [visible, setVisible] = useState(false);
   const [sortedBy, setSortedBy] = useState('Latest repositories');
-  const { repositories } = useRepositories(sortedBy);
+
+  const { repositories } = useRepositories(sortedBy, bouncedFilter);
 
   const repositoryNodes = repositories
     ? repositories.edges.map(edge => edge.node)
@@ -63,6 +69,12 @@ const RepositoryList = () => {
       </Menu >
 
       <FlatList
+        ListHeaderComponent={
+          <TextInput
+            label='Filter repositories'
+            value={filter}
+            onChangeText={filter => setFilter(filter)}
+          />}
       data={repositoryNodes}
       renderItem={renderItem}
       ItemSeparatorComponent={ItemSeparator}
