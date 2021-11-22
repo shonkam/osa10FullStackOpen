@@ -29,8 +29,10 @@ export const AUTHORIZED_USER = gql`
           node {
             id
             repository {
+              id
               name
               ownerName
+              url
             }
             text
             rating
@@ -69,6 +71,14 @@ export const REPOSITORY = gql`
           }
         }
     }
+  }
+`;
+
+export const DELETE_REVIEW = gql`
+  mutation ($id: ID!){
+      deleteReview(
+        id: $id
+      )
   }
 `;
 

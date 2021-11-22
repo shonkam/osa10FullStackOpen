@@ -5,14 +5,9 @@ const useAuthorizedUser = (includeReviews) => {
 
   if (includeReviews) {
     const { data, error } = useQuery(AUTHORIZED_USER, {
-      variables: { "includeReviews": true },
-      headers: {
-        fetchPolicy: 'cache-and-network',
-      }
+      variables: { "includeReviews": true }
     });
     if (data) {
-      //console.log('hook data', data.authorizedUser.reviews);
-      console.log('hook data', data.authorizedUser.reviews);
       return data.authorizedUser.reviews;
     }
     if (error) {
