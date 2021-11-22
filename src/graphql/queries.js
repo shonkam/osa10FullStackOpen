@@ -21,9 +21,23 @@ export const GET_REPOSITORIES = gql`
 `;
 
 export const AUTHORIZED_USER = gql`
-  query {
+  query ($includeReviews: Boolean = false){
     authorizedUser {
       username
+      reviews @include(if : $includeReviews) {
+        edges {
+          node {
+            id
+            repository {
+              name
+              ownerName
+            }
+            text
+            rating
+            createdAt
+          }
+        }
+      }
     }
   }
 `;

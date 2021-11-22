@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image, StyleSheet, Button, FlatList } from 'react-native';
+import { View, Image, StyleSheet, Button, ScrollView } from 'react-native';
 import Text from './Text';
 import { useParams } from "react-router-native";
 import useRepository from '../hooks/useRepository';
@@ -8,7 +8,6 @@ import * as WebBrowser from 'expo-web-browser';
 const SingleRepositoryView = () => {
 
   const { id } = useParams();
-  console.log('single param id', id);
   const repo = useRepository(id);
 
   if (!repo) {
@@ -78,7 +77,6 @@ const SingleRepositoryView = () => {
       <View style={styles.reviewContainer}>
         <View style={styles.reviewScore}>
           <Text style={styles.rating}>{review.rating}</Text>
-
         </View>
         <View style={styles.reviewInfo}>
           <Text fontWeight="bold" style={{ fontSize: 16 }}>{review.user.username} </Text>
@@ -89,10 +87,8 @@ const SingleRepositoryView = () => {
     );
   };
 
-  const ItemSeparator = () => <View style={styles.separator} />;
-
   return (
-    < View style={styles.container}>
+    < ScrollView style={styles.container}>
       <View style={styles.pictureNameDesc}>
         <Image style={styles.logo} source={{ uri: ownerAvatarUrl }} />
         <View style={styles.nameDesc}>
@@ -124,20 +120,20 @@ const SingleRepositoryView = () => {
         />
       </View>
 
-      <View style={styles.separator} />
-
-      <FlatList
-        data={repositoryReviews}
-        renderItem={({ item }) => <ReviewItem review={item} />}
-        keyExtractor={({ id }) => id}
-        ItemSeparatorComponent={ItemSeparator}
-      />
-    </View>
+      <View>
+        {repositoryReviews.map(item =>
+          <View key={item.id} style={{ paddingTop: 10 }}>
+            <ReviewItem key={item.id} review={item} />
+          </View>
+        )}
+      </View>
+    </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
+
   },
   button: {
     flexGrow: 1,

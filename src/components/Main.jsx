@@ -8,6 +8,7 @@ import SignOut from "./SignOut";
 import SingleRepositoryView from "./SingleRepositoryView";
 import CreateReview from "./CreateReview";
 import SignUp from "./SignUp";
+import myReviews from "./myReviews";
 
 const Main = () => {
   return (
@@ -19,6 +20,8 @@ const Main = () => {
         <Route path="/repository/:id" component={SingleRepositoryView} />
         <Route path="/createReview" component={CreateReview} />
         <Route path="/signup" component={SignUp} />
+        <Route path="/myReviews" component={myReviews} />
+
         <Route exact path="/" component={RepositoryList} />
       </Switch>
     </SafeAreaView>

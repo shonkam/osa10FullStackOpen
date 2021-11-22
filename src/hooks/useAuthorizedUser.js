@@ -1,13 +1,30 @@
 import { useQuery } from '@apollo/client';
 import { AUTHORIZED_USER } from '../graphql/queries';
 
-const useAuthorizedUser = () => {
+const useAuthorizedUser = (includeReviews) => {
 
-  const getUser = () => {
+  if (includeReviews) {
+    const { data, error } = useQuery(AUTHORIZED_USER, {
+      variables: { "includeReviews": true },
+      headers: {
+        fetchPolicy: 'cache-and-network',
+      }
+    });
+    if (data) {
+      //console.log('hook data', data.authorizedUser.reviews);
+      console.log('hook data', data.authorizedUser.reviews);
+      return data.authorizedUser.reviews;
+    }
+    if (error) {
+      console.log(error);
+    }
+
+  }
+  else {
     let data = useQuery(AUTHORIZED_USER, {
       context: {
         headers: {
-          fetchPolicy: 'cache-and-network',
+          fetchPolicy: 'cache-and-network'
         }
       }
     });
@@ -23,12 +40,8 @@ const useAuthorizedUser = () => {
     if (data.username) {
       return true;
     }
+  }
 
-
-  };
-
-  const response = getUser();
-  return response;
 };
 
 export default useAuthorizedUser;
