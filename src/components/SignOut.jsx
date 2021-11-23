@@ -9,7 +9,6 @@ const SignOut = () => {
 
 
   try {
-    console.log('logging out');
     const signingOut = useSignOut();
     console.log(signingOut);
     history.push("/");

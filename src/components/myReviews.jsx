@@ -47,7 +47,6 @@ const myReviews = () => {
     };
 
     const removeReview = () => {
-      console.log('remove', review.repository.id);
       try {
         deleteReviewHook(review.id);
         console.log('Successfully removed review');

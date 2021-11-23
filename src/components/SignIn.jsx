@@ -30,7 +30,6 @@ const SignIn = () => {
 
     try {
       await signIn(username, password);
-      console.log('logged in successfully');
       history.push("/");
     } catch (e) {
       console.log(e);

@@ -5,7 +5,6 @@ const useDeleteReview = () => {
   const [mutate] = useMutation(DELETE_REVIEW);
 
   const deleteReview = async (id) => {
-    console.log('remove hook', id);
     const { data, error } = await mutate({
       variables: { id },
       refetchQueries: [
@@ -18,7 +17,6 @@ const useDeleteReview = () => {
       return false;
     }
     if (data) {
-      console.log(data);
       return true;
     }
   };

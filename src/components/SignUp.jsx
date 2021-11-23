@@ -39,14 +39,10 @@ const SignUp = () => {
     const username = values.username;
     const password = values.password;
 
-    console.log(username, password);
-
     try {
       const response = await signUp(username, password);
       if (response) {
-        console.log('signed up successfully');
         await signIn(username, password);
-        console.log('logged in successfully');
         history.push("/");
       }
       else {

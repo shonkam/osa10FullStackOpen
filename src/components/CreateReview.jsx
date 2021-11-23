@@ -1,10 +1,8 @@
 import React from 'react';
 import useCreateReview from '../hooks/useCreateReview';
-
 import { Formik } from 'formik';
 import * as yup from 'yup';
 import ReviewForm from './ReviewForm';
-
 import { useHistory } from "react-router-native";
 
 const initialValues = {
@@ -40,7 +38,6 @@ const CreateReview = () => {
     let rating = review.rating;
     rating = parseInt(rating);
     const text = review.review;
-    console.log(repositoryName, ownerName, rating, text);
 
     try {
       const response = await createReview(repositoryName, ownerName, rating, text);
