@@ -133,7 +133,7 @@ const SingleRepositoryView = () => {
 
 const styles = StyleSheet.create({
   container: {
-
+    flex: 1
   },
   button: {
     flexGrow: 1,

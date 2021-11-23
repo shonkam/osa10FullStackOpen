@@ -1,7 +1,7 @@
 import React from 'react';
 import { Formik } from 'formik';
 import * as yup from 'yup';
-import SingInForm from './SignInForm';
+import SignInForm from './SignInForm';
 import useSignIn from '../hooks/useSignIn';
 import { useHistory } from "react-router-native";
 
@@ -44,7 +44,7 @@ const SignIn = () => {
       onSubmit={onSubmit}
       validationSchema={validationSchema}
     >
-      {({ handleSubmit }) => <SingInForm onSubmit={handleSubmit} />}
+      {({ handleSubmit }) => <SignInForm onSubmit={handleSubmit} />}
     </Formik>
   );
 };

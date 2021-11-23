@@ -1,15 +1,15 @@
 import React from "react";
-import FormikTextInput from './FormikTextInput';
+import FormikTextInput from '../FormikTextInput';
 import { View, Pressable, StyleSheet } from 'react-native';
-import Text from './Text';
+import Text from '../Text';
 
 const SingInForm = ({ onSubmit }) => {
 
   return (
     <View style={styles.container}>
-      <FormikTextInput style={styles.inputField} name="username" placeholder="Username" />
-      <FormikTextInput style={styles.inputField} name="password" placeholder="Password" />
-      <Pressable style={styles.button} onPress={onSubmit}>
+      <FormikTextInput style={styles.inputField} name="username" placeholder="Username" testID="usernameField" />
+      <FormikTextInput style={styles.inputField} name="password" placeholder="Password" testID="passwordField" />
+      <Pressable style={styles.button} onPress={onSubmit} testID="submitButton">
         <Text style={{ textAlign: 'center', color: 'white', paddingVertical: 5 }}>Log in</Text>
       </Pressable>
     </View>
